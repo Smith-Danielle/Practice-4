@@ -1131,10 +1131,178 @@ namespace Practice4
             }
             return converted;
         }
+        /*static void Main(string[] args)
+        {
+            int[] test = new int[] { 1, 1, 3, 3, 7, 2, 2, 2, 2, 1, 1, 1 };
+
+            var spaces = " danielle      smith        ddms ";
+
+            var trimIt = spaces.Trim();
+
+            var listIt = trimIt.ToList();
+            for (int i = 0; i < listIt.Count; i++)
+            {
+                if (listIt[i] == ' ' && listIt[i + 1] == ' ')
+                {
+                    listIt[i] = '0';
+                }
+            }
+            List<char> trans = new List<char>();
+            for (int i = 0; i < listIt.Count; i++)
+            {
+                if (listIt[i] != '0')
+                {
+                    trans.Add(listIt[i]);
+                }
+            }
+            for (int i = 0; i < trans.Count; i++)
+            {
+                if (trans[i] == ' ')
+                {
+                    trans[i + 1] = char.ToUpper(trans[i + 1]);
+                }
+            }
+            var together = string.Join("", trans);
+            var upper = char.ToUpper(together[0]);
+            var removed = together.Remove(0, 1);
+            var replaceIt = removed.Insert(0, upper.ToString());
+            var insertIt = replaceIt.Insert(0, "#");
+            var finalTrim = insertIt.Replace(" ", string.Empty);
+            Console.WriteLine(finalTrim);
+            /*foreach (var item in trans)
+            {
+                Console.WriteLine(item);
+            }
+
+        }*/
         static void Main(string[] args)
         {
-            int[] test = new int[] { 13, 11, 10, 3, 2, 1, 4, 5, 6, 9, 7, 8 };
-            wave("danielle it");
+            
+            string[] scores = new string[] { ":)", ":(", ":D", ":O", ":;" };
+            Console.WriteLine(CountSmileys(scores));
+            
+        }
+        public static int CountSmileys(string[] smileys)
+        {
+            int count = 0;
+            for (int i = 0; i < smileys.Length; i++)
+            {
+                if (smileys[i].Length == 2)
+                {
+                    if (smileys[i][0] == ':' || smileys[i][0] == ';')
+                    {
+                        if (smileys[i][1] == ')' || smileys[i][1] == 'D')
+                        {
+                            count++;
+                        }
+                    }
+                }
+                else if (smileys[i].Length == 3)
+                {
+                    if (smileys[i][0] == ':' || smileys[i][0] == ';')
+                    {
+                        if (smileys[i][1] == '-' || smileys[i][1] == '~')
+                        {
+                            if (smileys[i][2] == ')' || smileys[i][2] == 'D')
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+            return count;
+        }
+        public static string StripComments(string text, string[] commentSymbols)
+        {
+            bool action = true;
+            string newText = string.Empty;
+            
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (!commentSymbols.Contains(text[i].ToString()) && action == true)
+                {
+                    newText += text[i];
+                }
+                else
+                {
+                    action = false;
+                }
+                string newText2 = string.Empty;
+                if (action == false && text[i] == '\n')
+                {
+                    newText2 = newText.Remove(newText.Length - 1);
+                    newText2 += text[i];
+                    action = true;
+                }
+                if (newText2.Length > 0)
+                {
+                    newText = newText2;
+                }
+            }
+            return newText;
+        }
+        public static int Average(int[] scores)
+        {
+            double sum = scores.Sum();
+            double average = sum / scores.Length;
+            return Convert.ToInt32(Math.Round(average, 0));
+        }
+        public static string GoodVsEvil(string good, string evil)
+        {
+            var goodSplit = good.Split(" ").ToArray();
+            int[] goodArray = Array.ConvertAll(goodSplit, int.Parse);
+            int goodCount = goodArray[0] * 1 + goodArray[1] * 2 + goodArray[2] * 3 + goodArray[3] * 3 + goodArray[4] * 4 + goodArray[5] * 10;
+
+            var evilSplit = evil.Split(" ").ToArray();
+            int[] evilArray = Array.ConvertAll(evilSplit, int.Parse);
+            int evilCount = evilArray[0] * 1 + evilArray[1] * 2 + evilArray[2] * 2 + evilArray[3] * 2 + evilArray[4] * 3 + evilArray[5] * 5 + evilArray[6] * 10;
+            if (goodCount > evilCount)
+            {
+                return "Battle Result: Good triumphs over Evil";
+            }
+            else if (goodCount == evilCount)
+            {
+                return "Battle Result: No victor on this battle field";
+            }
+            return "Battle Result: Evil eradicates all trace of Good";
+            
+        }
+        public static void DeleteNth(int[] arr, int x)
+        {
+            var over = arr.GroupBy(item => item).Where(item => item.Count() > x).Select(item => item.Key).ToList();
+            int[] counter = new int[over.Count()];
+            for (int i = 0; i < over.Count(); i++)
+            {
+                counter[i] = 0;
+            }
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < over.Count(); j++)
+                {
+                    if (arr[i] == over[j]) 
+                    {
+                        if (counter[j] > x - 1)
+                        {
+                            arr[i] = 0;
+                        }
+                        counter[j]++;
+                    }
+                }
+            }
+            List<int> answer = new List<int>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != 0)
+                {
+                    answer.Add(arr[i]);
+                }
+            }
+            var answerArray = answer.ToArray();
+            foreach (var item in answer)
+            {
+                Console.WriteLine(item);
+            }
         }
         public static void wave(string str)
         {
@@ -1201,7 +1369,7 @@ namespace Practice4
             {
                 Console.WriteLine(item);
             }*/
-            Console.WriteLine(noSpace);
+        Console.WriteLine(noSpace);
         }
         public static bool Narcissistic(int value)
         {
