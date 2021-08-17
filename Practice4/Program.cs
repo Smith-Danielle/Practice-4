@@ -1178,9 +1178,187 @@ namespace Practice4
         static void Main(string[] args)
         {
             
-            string[] scores = new string[] { ":)", ":(", ":D", ":O", ":;" };
-            Console.WriteLine(CountSmileys(scores));
+            int[] scores = new int[] {9,7,2,5,-2,-7,-4,-5,1,-5,4,-5,2,9,2,-7,-7,4,3,8};
+            Console.WriteLine(AverageString("zero nine five two"));
             
+        }
+        public static string AverageString(string str)
+        {
+            var strList = str.Split(" ").ToList();
+            List<int> nums = new List<int>();
+            foreach (var item in strList)
+            {
+                if (item == "zero")
+                {
+                    nums.Add(0);
+                }
+                if (item == "one")
+                {
+                    nums.Add(1);
+                }
+                if (item == "two")
+                {
+                    nums.Add(2);
+                }
+                if (item == "three")
+                {
+                    nums.Add(3);
+                }
+                if (item == "four")
+                {
+                    nums.Add(4);
+                }
+                if (item == "five")
+                {
+                    nums.Add(5);
+                }
+                if (item == "six")
+                {
+                    nums.Add(6);
+                }
+                if (item == "seven")
+                {
+                    nums.Add(7);
+                }
+                if (item == "eight")
+                {
+                    nums.Add(8);
+                }
+                if (item == "nine")
+                {
+                    nums.Add(9);
+                }
+            }
+            var sum = nums.Sum(item => item);
+            var average = sum / nums.Count;
+            if (nums.Count != strList.Count)
+            {
+                return "n/a";
+            }
+            if (average == 0)
+            {
+                return "zero";
+            }
+            else if (average == 1)
+            {
+                return "one";
+            }
+            else if (average == 2)
+            {
+                return "two";
+            }
+            else if (average == 3)
+            {
+                return "three";
+            }
+            else if (average == 4)
+            {
+                return "four";
+            }
+            else if (average == 5)
+            {
+                return "five";
+            }
+            else if (average == 6)
+            {
+                return "six";
+            }
+            else if (average == 7)
+            {
+                return "seven";
+            }
+            else if (average == 8)
+            {
+                return "eight";
+            }
+            else if (average == 9)
+            {
+                return "nine";
+            }
+            return "n/a";
+        }
+        public static string jumbledString(string s, long n)
+        {
+            string even = string.Empty;
+            string odd = string.Empty;
+            long count = 0;
+            
+            do
+            {
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        even += s[i];
+                    }
+                    else
+                    {
+                        odd += s[i];
+                    }
+                    
+                }
+                count++;
+                string endResult = string.Concat(even, odd);
+                s = string.Empty;
+                s = endResult;
+                even = string.Empty;
+                odd = string.Empty;
+
+            } while (count < n);
+
+            return s;
+
+        }
+        public static int[] FirstNSmallest(int[] arr, int n)
+        {
+            var sorted = arr.OrderBy(item => item).Take(n).ToList();
+            int[] answer = new int[n];
+            int count = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (sorted.Contains(arr[i]) && count < n)
+                {
+                    answer[count] = arr[i];
+                    count++;
+                    sorted.Remove(arr[i]);
+                }
+            }
+            foreach (var item in sorted)
+            {
+                Console.WriteLine(item);
+            }
+            return answer;
+            /*var sorted = arr.OrderBy(item => item).Take(n);
+            List<int> answer = new List <int>();
+            for ( int i = 0; i < arr.Length; i++)
+            {
+                if (sorted.Contains(arr[i]))
+                {
+                    answer.Add(arr[i]);
+                }
+            }
+            return answer.ToArray();*/
+        }
+        public static string StringBreakers(int n, string str)
+        {
+            var newStr = str.Replace(" ", string.Empty).Trim();
+            int count = 0;
+            string theEmptyOne = string.Empty;
+            for (int i = 0; i < newStr.Length; i++)
+            {
+                
+                theEmptyOne += newStr[i];
+                count++;
+                if (count % n == 0)
+                {
+                    theEmptyOne += '\n';
+                }
+            }
+            if (theEmptyOne[theEmptyOne.Length - 1] == '\n')
+            {
+                return theEmptyOne.Remove(theEmptyOne.Length - 1);
+            }
+            return theEmptyOne;
         }
         public static int CountSmileys(string[] smileys)
         {
