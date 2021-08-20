@@ -1177,10 +1177,424 @@ namespace Practice4
         }*/
         static void Main(string[] args)
         {
-            
-            int[] scores = new int[] {9,7,2,5,-2,-7,-4,-5,1,-5,4,-5,2,9,2,-7,-7,4,3,8};
-            Console.WriteLine(AverageString("zero nine five two"));
-            
+
+            int[] scores = new int[] { 9, 7, 2, 5, -2, -7, -4, -5, 1, -5, 4, -5, 2, 9, 2, -7, -7, 4, 3, 8 };
+            Solution(12);
+
+        }
+        public static void Solution(long n)
+        {
+            long collection = 0;
+            for (int i = 1; i < n + 1; i++)
+            {
+                var convert = i.ToString();
+                if (convert.Length > 1)
+                {
+                    int temp = 0;
+                    foreach (var item in convert)
+                    {
+                        temp += Convert.ToInt32(item) - 48;
+                        
+                    }
+                    collection += temp;
+                }
+                else
+                {
+                    collection += i;
+                }
+            }
+            Console.WriteLine(collection);
+        }
+        public static string ReverseWords(string str)
+        {
+            var split = str.Split(" ").ToList();
+            List<string> reversed = new List<string>();
+            for (int i = 0; i < split.Count; i++)
+            {
+                var temp = split[i];
+                string rev = string.Empty;
+                for (int j = temp.Length - 1; j >= 0; j--)
+                {
+                    rev += temp[j];
+                }
+                reversed.Add(rev);
+            }
+            var joined = string.Join(" ", reversed);
+            return joined;
+        }
+        public static string Number2Words(int n)
+        {
+            var convert = n.ToString();
+            string lettered = string.Empty;
+            if (convert.Length > 5)
+            {
+                if (convert[convert.Length - 6] == '1')
+                {
+                    lettered += "one hundred ";
+                }
+                if (convert[convert.Length - 6] == '2')
+                {
+                    lettered += "two hundred ";
+                }
+                if (convert[convert.Length - 6] == '3')
+                {
+                    lettered += "three hundred ";
+                }
+                if (convert[convert.Length - 6] == '4')
+                {
+                    lettered += "four hundred ";
+                }
+                if (convert[convert.Length - 6] == '5')
+                {
+                    lettered += "five hundred ";
+                }
+                if (convert[convert.Length - 6] == '6')
+                {
+                    lettered += "six hundred ";
+                }
+                if (convert[convert.Length - 6] == '7')
+                {
+                    lettered += "seven hundred ";
+                }
+                if (convert[convert.Length - 6] == '8')
+                {
+                    lettered += "eight hundred ";
+                }
+                if (convert[convert.Length - 6] == '9')
+                {
+                    lettered += "nine hundred ";
+                }
+            }
+            if (convert.Length > 4)
+            {
+                if (convert[convert.Length - 5] == '1')
+                {
+                    if (convert[convert.Length - 4] == '0')
+                    {
+                        lettered += "ten thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '1')
+                    {
+                        lettered += "eleven thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '2')
+                    {
+                        lettered += "twelve thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '3')
+                    {
+                        lettered += "thirteen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '4')
+                    {
+                        lettered += "fourteen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '5')
+                    {
+                        lettered += "fifteen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '6')
+                    {
+                        lettered += "sixteen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '7')
+                    {
+                        lettered += "seventeen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '8')
+                    {
+                        lettered += "eighteen thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '9')
+                    {
+                        lettered += "nineteen thousand ";
+                    }
+                }
+                if (convert[convert.Length - 5] == '2')
+                {
+                    lettered += "twenty-";
+                }
+                if (convert[convert.Length - 5] == '3')
+                {
+                    lettered += "thirty-";
+                }
+                if (convert[convert.Length - 5] == '4')
+                {
+                    lettered += "fourty-";
+                }
+                if (convert[convert.Length - 5] == '5')
+                {
+                    lettered += "fifty-";
+                }
+                if (convert[convert.Length - 5] == '6')
+                {
+                    lettered += "sixty-";
+                }
+                if (convert[convert.Length - 5] == '7')
+                {
+                    lettered += "seventy-";
+                }
+                if (convert[convert.Length - 5] == '8')
+                {
+                    lettered += "eighty-";
+                }
+                if (convert[convert.Length - 5] == '9')
+                {
+                    lettered += "ninety-";
+                }
+            }
+            if (convert.Length > 3)
+            {
+                if (convert.Length == 4 || convert[convert.Length - 5] != '1')
+                {
+                    if (convert[convert.Length - 4] == '1')
+                    {
+                        lettered += "one thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '2')
+                    {
+                        lettered += "two thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '3')
+                    {
+                        lettered += "three thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '4')
+                    {
+                        lettered += "four thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '5')
+                    {
+                        lettered += "five thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '6')
+                    {
+                        lettered += "six thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '7')
+                    {
+                        lettered += "seven thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '8')
+                    {
+                        lettered += "eight thousand ";
+                    }
+                    if (convert[convert.Length - 4] == '9')
+                    {
+                        lettered += "nine thousand ";
+                    }
+                }
+            }
+            if (convert.Length > 2)
+            {
+                if (convert[convert.Length - 3] == '1')
+                {
+                    lettered += "one hundred ";
+                }
+                if (convert[convert.Length - 3] == '2')
+                {
+                    lettered += "two hundred ";
+                }
+                if (convert[convert.Length - 3] == '3')
+                {
+                    lettered += "three hundred ";
+                }
+                if (convert[convert.Length - 3] == '4')
+                {
+                    lettered += "four hundred ";
+                }
+                if (convert[convert.Length - 3] == '5')
+                {
+                    lettered += "five hundred ";
+                }
+                if (convert[convert.Length - 3] == '6')
+                {
+                    lettered += "six hundred ";
+                }
+                if (convert[convert.Length - 3] == '7')
+                {
+                    lettered += "seven hundred ";
+                }
+                if (convert[convert.Length - 3] == '8')
+                {
+                    lettered += "eight hundred ";
+                }
+                if (convert[convert.Length - 3] == '9')
+                {
+                    lettered += "nine hundred ";
+                }
+            }
+            if (convert.Length > 1)
+            {
+                if (convert[convert.Length - 2] == '1')
+                {
+                    if (convert[convert.Length - 1] == '0')
+                    {
+                        lettered += "ten";
+                    }
+                    if (convert[convert.Length - 1] == '1')
+                    {
+                        lettered += "eleven";
+                    }
+                    if (convert[convert.Length - 1] == '2')
+                    {
+                        lettered += "twelve";
+                    }
+                    if (convert[convert.Length - 1] == '3')
+                    {
+                        lettered += "thirteen";
+                    }
+                    if (convert[convert.Length - 1] == '4')
+                    {
+                        lettered += "fourteen";
+                    }
+                    if (convert[convert.Length - 1] == '5')
+                    {
+                        lettered += "fifteen";
+                    }
+                    if (convert[convert.Length - 1] == '6')
+                    {
+                        lettered += "sixteen";
+                    }
+                    if (convert[convert.Length - 1] == '7')
+                    {
+                        lettered += "seventeen";
+                    }
+                    if (convert[convert.Length - 1] == '8')
+                    {
+                        lettered += "eighteen";
+                    }
+                    if (convert[convert.Length - 1] == '9')
+                    {
+                        lettered += "nineteen";
+                    }
+                }
+                if (convert[convert.Length - 2] == '2')
+                {
+                    lettered += "twenty-";
+                }
+                if (convert[convert.Length - 2] == '3')
+                {
+                    lettered += "thirty-";
+                }
+                if (convert[convert.Length - 2] == '4')
+                {
+                    lettered += "fourty-";
+                }
+                if (convert[convert.Length - 2] == '5')
+                {
+                    lettered += "fifty-";
+                }
+                if (convert[convert.Length - 2] == '6')
+                {
+                    lettered += "sixty-";
+                }
+                if (convert[convert.Length - 2] == '7')
+                {
+                    lettered += "seventy-";
+                }
+                if (convert[convert.Length - 2] == '8')
+                {
+                    lettered += "eighty-";
+                }
+                if (convert[convert.Length - 2] == '9')
+                {
+                    lettered += "ninety-";
+                }
+            }
+            if (convert.Length == 1 || convert[convert.Length - 2] != '1')
+            {
+                if (convert[convert.Length - 1] == '1')
+                {
+                    lettered += "one";
+                }
+                if (convert[convert.Length - 1] == '2')
+                {
+                    lettered += "two";
+                }
+                if (convert[convert.Length - 1] == '3')
+                {
+                    lettered += "three";
+                }
+                if (convert[convert.Length - 1] == '4')
+                {
+                    lettered += "four";
+                }
+                if (convert[convert.Length - 1] == '5')
+                {
+                    lettered += "five";
+                }
+                if (convert[convert.Length - 1] == '6')
+                {
+                    lettered += "six";
+                }
+                if (convert[convert.Length - 1] == '7')
+                {
+                    lettered += "seven";
+                }
+                if (convert[convert.Length - 1] == '8')
+                {
+                    lettered += "eight";
+                }
+                if (convert[convert.Length - 1] == '9')
+                {
+                    lettered += "nine";
+                }
+            }
+            if (convert.Length == 1)
+            {
+                if (convert[convert.Length - 1] == '0')
+                {
+                    lettered += "zero";
+                }
+            }
+            if (lettered[lettered.Length - 1] == '-')
+            {
+                lettered = lettered.Remove(lettered.Length - 1);
+            }
+            return lettered.Trim();
+        }
+        public static bool IsAlt(string word)
+        {
+            List<char> shouldBeVowel = new List<char>();
+            List<char> shouldNotBeVowel = new List<char>();
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[0] == 'a' || word[0] == 'e' || word[0] == 'i' || word[0] == 'o' || word[0] == 'u')
+                {
+                    if (i % 2 == 0)
+                    {
+                        shouldBeVowel.Add(word[i]);
+                    }
+                    else
+                    {
+                        shouldNotBeVowel.Add(word[i]);
+                    }
+                }
+                else
+                {
+                    if (i % 2 != 0)
+                    {
+
+                        shouldBeVowel.Add(word[i]);
+
+                    }
+                    else
+                    {
+                        shouldNotBeVowel.Add(word[i]);
+                    }
+                }
+            }
+
+            if (shouldBeVowel.Contains('b') || shouldBeVowel.Contains('c') || shouldBeVowel.Contains('d') || shouldBeVowel.Contains('f') || shouldBeVowel.Contains('g') || shouldBeVowel.Contains('h') || shouldBeVowel.Contains('j') || shouldBeVowel.Contains('k') || shouldBeVowel.Contains('l') || shouldBeVowel.Contains('m') || shouldBeVowel.Contains('n') || shouldBeVowel.Contains('p') || shouldBeVowel.Contains('q') || shouldBeVowel.Contains('r') || shouldBeVowel.Contains('s') || shouldBeVowel.Contains('t') || shouldBeVowel.Contains('v') || shouldBeVowel.Contains('w') || shouldBeVowel.Contains('x') || shouldBeVowel.Contains('y') || shouldBeVowel.Contains('z'))
+            {
+                return false;
+            }
+            if (shouldNotBeVowel.Contains('a') || shouldNotBeVowel.Contains('e') || shouldNotBeVowel.Contains('i') || shouldNotBeVowel.Contains('o') || shouldNotBeVowel.Contains('u'))
+            {
+                return false;
+            }
+            return true;
         }
         public static string AverageString(string str)
         {
