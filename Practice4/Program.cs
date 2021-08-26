@@ -762,57 +762,7 @@ namespace Practice4
             return true;
 
         }
-        public static bool is_valid_IP(string ipAddres)
-        {
-            if (!ipAddres.Any(Char.IsLetterOrDigit))
-            {
-                return false;
-            }
-
-
-            if (ipAddres.Any(Char.IsLetter) || ipAddres == "" || ipAddres.Contains(" ") || ipAddres == " ")
-            {
-                return false;
-            }
-
-            int[] split = new int[ipAddres.Length];
-            for (int i = 0; i < ipAddres.Length; i++)
-            {
-                split[i] = Convert.ToInt32(ipAddres[i]);
-            }
-
-            if (split.Length != 4)
-            {
-                return false;
-            }
-
-            var split2 = ipAddres.Split('.');
-            for (int i = 0; i < split2.Length; i++)
-            {
-                if (split2[i][0] == '0' && split2[i].Length > 1)
-                {
-                    return false;
-                }
-            }
-
-            List<int> split1 = new List<int>();
-            foreach (var item in split)
-            {
-                split1.Add(item);
-            }
-
-            for (int i = 0; i < split1.Count; i++)
-            {
-                if (split1[i] > 255 || split1[i] < 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-
-
-
-        }
+        
         public static bool IsPangram(string str)
         {
             var lower = str.ToLower();
@@ -1175,12 +1125,433 @@ namespace Practice4
             }
 
         }*/
+        
+        public static string orderWeight(string strng)
+        {
+            var split = strng.Split(" ").ToList();
+            List<string> numIndex = new List<string>();
+            for (int i = 0; i < split.Count; i++)
+            {
+                int total = 0;
+                for (int j = 0; j < split[i].Length; j++)
+                {
+                    total += split[i][j] - 48;
+                 }
+                numIndex.Add($"{total}.{i}");
+
+            }
+            List<decimal> convert = new List<decimal>();
+            foreach (var item in numIndex)
+            {
+                convert.Add(Convert.ToDecimal(item));
+            }
+            var order = convert.OrderBy(item => item).ToList();
+            List<string> index = new List<string>();
+            foreach (var item in order)
+            {
+                var temp = item.ToString();
+                index.Add(temp.Substring(temp.IndexOf('.') + 1));
+            }
+            List<string> answer = new List<string>();
+            for (int i = 0; i < index.Count; i++)
+            {
+                answer.Add(split[Convert.ToInt32(index[i])]);
+            }
+            var final = string.Join(" ", answer);
+            return final;
+        }
+        public static string SplitInParts(string s, int partLength)
+        {
+            string answer = string.Empty;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (i > 0 && i % partLength == 0)
+                {
+                    answer += " ";
+                }
+                answer += s[i];
+            }
+            return answer;
+        }
+        public static string RPSLP(string player1, string player2)
+        {
+            if (player1.ToLower() == "rock")
+            {
+                if (player2.ToLower() == "lizard" || player2.ToLower() == "scissor")
+                {
+                    return "Player 1 won!";
+                }
+                else if (player2.ToLower() == "spock" || player2.ToLower() == "paper")
+                {
+                    return "Player 2 won!";
+                }
+                else if (player2.ToLower() == "rock")
+                {
+                    return "Draw!";
+                }
+            }
+            if (player1.ToLower() == "paper")
+            {
+                if (player2.ToLower() == "rock" || player2.ToLower() == "spock")
+                {
+                    return "Player 1 won!";
+                }
+                else if (player2.ToLower() == "scissor" || player2.ToLower() == "lizard")
+                {
+                    return "Player 2 won!";
+                }
+                else if (player2.ToLower() == "paper")
+                {
+                    return "Draw!";
+                }
+
+            }
+            if (player1.ToLower() == "scissor")
+            {
+                if (player2.ToLower() == "lizard" || player2.ToLower() == "paper")
+                {
+                    return "Player 1 won!";
+                }
+                else if (player2.ToLower() == "rock" || player2.ToLower() == "spock")
+                {
+                    return "Player 2 won!";
+                }
+                else if (player2.ToLower() == "scissor")
+                {
+                    return "Draw!";
+                }
+            }
+            if (player1.ToLower() == "spock")
+            {
+                if (player2.ToLower() == "scissor" || player2.ToLower() == "rock")
+                {
+                    return "Player 1 won!";
+                }
+                else if (player2.ToLower() == "lizard" || player2.ToLower() == "paper")
+                {
+                    return "Player 2 won!";
+                }
+                else if (player2.ToLower() == "spock")
+                {
+                    return "Draw!";
+                }
+            }
+            if (player1.ToLower() == "lizard")
+            {
+                if (player2.ToLower() == "paper" || player2.ToLower() == "spock")
+                {
+                    return "Player 1 won!";
+                }
+                else if (player2.ToLower() == "rock" || player2.ToLower() == "scissor")
+                {
+                    return "Player 2 won!";
+                }
+                else if (player2.ToLower() == "lizard")
+                {
+                    return "Draw!";
+                }
+            }
+            if (player1 == null || player2 == null)
+            {
+                return "Oh, Unknown Thing";
+            }
+            return "Oh, Unknown Thing";
+        }
+        public static int TrailingZeros(int n)
+        {
+            BigInteger fact = 1;
+            for (int i = 1; i < n + 1; i++)
+            {
+                fact *= i;
+            }
+            var convert = fact.ToString().Reverse().ToList();
+            int zeros = 0;
+            for (int i = 0; i < convert.Count; i++)
+            {
+                if (convert[0] == '0')
+                {
+                    if (convert[i] == '0')
+                    {
+                        zeros++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return zeros;
+           
+            
+        }
+        public static string Repeater(string s, int n)
+        {
+            string answer = string.Empty;
+            for (int i = 1; i < n; i++)
+            {
+                answer += s;
+            }
+            return answer;
+        }
+        public static int FindDup(int[] arr)
+        {
+            var dup = arr.GroupBy(item => item).Where(item => item.Count() == 2).Select(item => item.Key);
+            return dup.First();
+        }
+        public static int[] Parse(string data)
+        {
+            
+            List<int> move = new List<int>();
+            int counter = 0;
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] == 'i')
+                {
+                    counter++;
+                }
+                if (data[i] == 'd')
+                {
+                    counter--;
+                }
+                if (data[i] == 's')
+                {
+                    counter *= counter;
+                }
+                if (data[i] == 'o')
+                {
+                    move.Add(counter);
+                }
+            }
+            var answer = move.ToArray();
+            return answer;
+        }
         static void Main(string[] args)
         {
 
             int[] scores = new int[] { 9, 7, 2, 5, -2, -7, -4, -5, 1, -5, 4, -5, 2, 9, 2, -7, -7, 4, 3, 8 };
-            Solution(12);
+            Console.WriteLine(RemoveParentheses("(first group) (second group) (third group)"));
 
+        }
+        public static string RemoveParentheses(string s)
+        {
+            string noPar = string.Empty;
+            bool leave = true;
+            int openCount = 0;
+            int closedCount = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+               
+                if (s[i] == '(')
+                {
+                    leave = false;
+                    openCount++;
+                }
+                if (leave == true)
+                {
+                    noPar += s[i];
+                }
+                if (s[i] == ')')
+                {
+                    closedCount++;
+                    if (openCount == closedCount)
+                    {
+                        leave = true;
+                    }
+                }
+                
+            }
+            return noPar;
+        }
+        public static int Solve(string s)
+        {
+            List<string> constant = new List<string>();
+            string individual = string.Empty;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] != 'a' && s[i] != 'e' && s[i] != 'i' && s[i] != 'o' && s[i] != 'u')
+                {
+                    individual += s[i];
+                    
+                }
+                else
+                {
+
+                    if (individual.Any())
+                    {
+                        constant.Add(individual);
+                        individual = string.Empty;
+                    }
+                    
+                }
+            }
+            if (individual.Any())
+            {
+                constant.Add(individual);
+            }
+            List<int> ranking = new List<int>();
+            for (int i = 0; i < constant.Count; i++)
+            {
+                int count = 0;
+                for (int j = 0; j < constant[i].Length; j++)
+                {
+                    
+                    if (constant[i][j] == 'b')
+                    {
+                        count += 2;
+                    }
+                    if (constant[i][j] == 'c')
+                    {
+                        count += 3;
+                    }
+                    if (constant[i][j] == 'd')
+                    {
+                        count += 4;
+                    }
+                    if (constant[i][j] == 'f')
+                    {
+                        count += 6;
+                    }
+                    if (constant[i][j] == 'g')
+                    {
+                        count += 7;
+                    }
+                    if (constant[i][j] == 'h')
+                    {
+                        count += 8;
+                    }
+                    if (constant[i][j] == 'j')
+                    {
+                        count += 10;
+                    }
+                    if (constant[i][j] == 'k')
+                    {
+                        count += 11;
+                    }
+                    if (constant[i][j] == 'l')
+                    {
+                        count += 12;
+                    }
+                    if (constant[i][j] == 'm')
+                    {
+                        count += 13;
+                    }
+                    if (constant[i][j] == 'n')
+                    {
+                        count += 14;
+                    }
+                    if (constant[i][j] == 'p')
+                    {
+                        count += 16;
+                    }
+                    if (constant[i][j] == 'q')
+                    {
+                        count += 17;
+                    }
+                    if (constant[i][j] == 'r')
+                    {
+                        count += 18;
+                    }
+                    if (constant[i][j] == 's')
+                    {
+                        count += 19;
+                    }
+                    if (constant[i][j] == 't')
+                    {
+                        count += 20;
+                    }
+                    if (constant[i][j] == 'v')
+                    {
+                        count += 22;
+                    }
+                    if (constant[i][j] == 'w')
+                    {
+                        count += 23;
+                    }
+                    if (constant[i][j] == 'x')
+                    {
+                        count += 24;
+                    }
+                    if (constant[i][j] == 'y')
+                    {
+                        count += 25;
+                    }
+                    if (constant[i][j] == 'z')
+                    {
+                        count += 26;
+                    }
+                }
+                ranking.Add(count);
+            }
+            var max = ranking.Max();
+            return max;
+            
+        }
+        public static void GroupByCommas(int n)
+        {
+            var convert = n.ToString().Reverse().ToList();
+            List<char> commas = new List<char>();
+            if (convert.Count >= 4)
+            {
+                for (int i = 0; i < convert.Count; i++)
+                {
+                    if (i > 1 && i % 3 == 0)
+                    {
+                        commas.Add(',');
+                    }
+                    commas.Add(convert[i]);
+                }
+            }
+            else
+            {
+                Console.WriteLine(n);
+            }
+            List<char> rev = new List<char>();
+            for (int i = commas.Count - 1; i >= 0; i--)
+            {
+                rev.Add(commas[i]);
+            }
+            var joinIt = string.Join("", rev);
+            Console.WriteLine(joinIt);
+            
+            
+
+        }
+        public static int[] TwoSum(int[] numbers, int target)
+        {
+            int[] answer = new int[2];
+            int count = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                for (int j = 0; j < numbers.Length; j++)
+                {
+                    if (i != j && numbers[i] + numbers[j] == target && count < 2)
+                    {
+                        answer[count] = i;
+                        count++;
+                        answer[count] = j;
+                        count++;
+                    }
+                }
+            }
+            return answer;
+        }
+        public static int DeleteDigit(int n)
+        {
+            
+            //List<string> parts = new List<string>();
+            var convert = n.ToString();
+            string[] parts = new string[convert.Length];
+            for (int i = 0; i < convert.Length; i++)
+            {
+                parts[i] = (convert.Remove(i, 1));
+            }
+            int[] toNum = Array.ConvertAll(parts, int.Parse);
+            var largest = toNum.Max();
+            return largest;
         }
         public static void Solution(long n)
         {
