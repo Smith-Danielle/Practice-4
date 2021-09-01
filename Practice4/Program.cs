@@ -1333,8 +1333,677 @@ namespace Practice4
         {
 
             int[] scores = new int[] { 9, 7, 2, 5, -2, -7, -4, -5, 1, -5, 4, -5, 2, 9, 2, -7, -7, 4, 3, 8 };
-            Console.WriteLine(RemoveParentheses("(first group) (second group) (third group)"));
+            string[] test = new string[] { "ninja", "samurai", "ronin", "dan", "john" };
+            Console.WriteLine(FormatWords(test));
 
+
+
+        }
+        public static string FormatWords(string[] words)
+        {
+            List<string> filtered = new List<string>();
+            string longFiltered = string.Empty;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].Length > 0)
+                {
+                    filtered.Add(words[i]);
+                }
+            }
+            if (filtered.Count == 0)
+            {
+                return "";
+            }
+            else if (filtered.Count == 2)
+            {
+                return string.Join(" and ", filtered);
+            }
+            else
+            {
+                for (int i = 0; i < filtered.Count; i++)
+                {
+                    longFiltered += filtered[i];
+                    
+                    
+                    if (i == filtered.Count - 2)
+                    {
+                        longFiltered += " and ";
+                    }
+                    else if (i != filtered.Count - 1)
+                    {
+                        longFiltered += ", ";
+                    }
+                }
+            }
+            return longFiltered;
+        }
+        public static string NumberFormat(int number)
+        {
+            
+            var toString = number.ToString().Reverse().ToList();
+            if (toString[toString.Count - 1] == '-')
+            {
+                toString.Remove('-');
+            }
+            string nums = string.Empty;
+            for (int i = toString.Count - 1; i >= 0; i--)
+            {
+                
+                nums += toString[i];
+                if (i % 3 == 0)
+                {
+                    nums += ',';
+                }
+            }
+            if (nums[0] == ',')
+            {
+                nums = nums.Substring(1);
+            }
+            if (nums[nums.Length - 1] == ',')
+            {
+                nums = nums.Substring(0, nums.Length - 1);
+            }
+            if (number < 0)
+            {
+                return nums.Insert(0, "-");
+            }
+            return nums;
+        }
+        public static string SortTheInnerContent(string words)
+        {
+            var wordsList = words.Split(" ").ToList();
+            List<string> individual = new List<string>();
+      
+            for (int i = 0; i < wordsList.Count; i++)
+            {
+                List<char> sorted = new List<char>();
+                for (int j = 0; j < wordsList[i].Length; j++)
+                {
+                    sorted.Add(wordsList[i][j]);
+                }
+                sorted.Sort();
+                var joinIt = string.Join("", sorted);
+                individual.Add(joinIt);
+            }
+            return "hello";
+        }
+        public static string GetOrder(string input)
+        {
+            List<string> food = new List<string>();
+            string item = string.Empty;
+            for (int i = 0; i < input.Length; i++)
+            {
+                item += input[i];
+                if (string.Equals(item, "burger") || string.Equals(item, "fries") || string.Equals(item, "chicken") || string.Equals(item, "pizza") || string.Equals(item, "sandwich") || string.Equals(item, "onionrings") || string.Equals(item, "milkshake") || string.Equals(item, "coke"))
+                {
+                    var first = char.ToUpper(item[0]);
+                    var rest = item.Substring(1);
+                    food.Add(string.Concat(first, rest));
+                    item = string.Empty;
+                }
+            }
+            List<string> ordered = new List<string>();
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Burger")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Fries")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Chicken")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Pizza")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Sandwich")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Onionrings")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Milkshake")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            for (int i = 0; i < food.Count; i++)
+            {
+                if (food[i] == "Coke")
+                {
+                    ordered.Add(food[i]);
+                }
+            }
+            var answer = string.Join(" ", ordered);
+            return answer;
+        }
+        public static string Unlock(string str)
+        {
+            string answer = string.Empty;
+            if (str.Contains("Nokia"))
+            {
+                answer = "66542";
+            }
+            if (str.Contains("Valut"))
+            {
+                answer = "82588";
+            }
+            if (str.Contains("toilet"))
+            {
+                answer = "864538";
+            }
+            return answer;
+
+        }
+        public static string ExtractFileName(string dirtFileName)
+        {
+            bool addIt = false;
+            string answer = string.Empty;
+            int count = 0;
+            int dashCount = 0;
+            for (int i = 0; i < dirtFileName.Length; i++)
+            {
+                if (dirtFileName[i] == '_')
+                {
+                    addIt = true;
+                    dashCount++;
+                    if (dashCount > 1)
+                    {
+                        answer += dirtFileName[i];
+                    }
+                }
+                else if (dirtFileName[i] == '.')
+                {
+                    count++;
+                    if (count < 2)
+                    {
+                        answer += dirtFileName[i];
+                    }
+                }
+                else if (addIt == true && count < 2)
+                {
+                    answer += dirtFileName[i];
+                }
+                
+            }
+            return answer;
+        }
+        public static string WhoIsNext(string[] names, long n)
+        {
+            string answer = string.Empty;
+            if (n < names.Length)
+            {
+                return names[n - 1];
+            }
+            else
+            {
+                long x = (long) Math.Floor((double) n / names.Length);
+                Console.WriteLine(x);
+                long y = x * names.Length;
+                long z = n - y;
+                answer = names[z];
+                
+            }
+            return answer;
+        }
+        public static int Divisors(int n)
+        {
+            int counter = 0;
+            for (int i = 0; i < n + 1; i++)
+            {
+                if (n % i == 0)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+        public static string calculateString(string calcIt)
+        {
+            string a = string.Empty;
+            string b = string.Empty;
+            string symbol = string.Empty;
+            bool order = true;
+
+            for (int i = 0; i < calcIt.Length; i++)
+            {
+                if (char.IsNumber(calcIt[i]) || calcIt[i] == '.')
+                {
+                    if (order == true)
+                    {
+                        a += calcIt[i].ToString();
+                        
+                    }
+                    else
+                    {
+                        b += calcIt[i].ToString();
+                        
+                    }
+                }
+                if (calcIt[i] == '+' || calcIt[i] == '-' || calcIt[i] == '*' || calcIt[i] == '/')
+                {
+                    symbol += calcIt[i].ToString();
+                    order = false;
+                    
+                }
+            }
+            var aNumber = Convert.ToDouble(a);
+            var bNumber = Convert.ToDouble(b);
+            double answer = 0;
+
+            if (symbol == "+")
+            {
+                answer = Math.Round(aNumber + bNumber);
+            }
+            else if (symbol == "-")
+            {
+                answer = aNumber - bNumber;
+            }
+            else if (symbol == "*")
+            {
+                answer = aNumber * bNumber;
+            }
+            else if (symbol == "/")
+            {
+                answer = aNumber / bNumber;
+            }
+            return answer.ToString();
+
+        }
+        public static bool is_valid_IP(string ipAddres)
+        {
+            if (ipAddres.Any(char.IsLetter) || ipAddres.Any(char.IsWhiteSpace) || ipAddres.Contains('-'))
+            {
+                return false;
+            }
+            var theList = ipAddres.Split('.').ToList();
+            foreach (var item in theList)
+            {
+                Console.WriteLine(item);
+            }
+            if (theList.Count != 4)
+            {
+                return false;
+            }
+            for (int i = 0; i < theList.Count; i++)
+            {
+                if (theList[i].Length > 1 && theList[i][0] == '0')
+                {
+                    return false;
+                }
+            }
+            for (int i = 0; i < theList.Count; i++)
+            {
+                if (theList[i] == "" || Convert.ToInt32(theList[i]) < 0 || Convert.ToInt32(theList[i]) > 255)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static string StringLetterCount(string str)
+        {
+            int a = 0;
+            int b = 0;
+            int c = 0;
+            int d = 0;
+            int e = 0;
+            int f = 0;
+            int g = 0;
+            int h = 0;
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            int l = 0;
+            int m = 0;
+            int n = 0;
+            int o = 0;
+            int p = 0;
+            int q = 0;
+            int r = 0;
+            int s = 0;
+            int t = 0;
+            int u = 0;
+            int v = 0;
+            int w = 0;
+            int x = 0;
+            int y = 0;
+            int z = 0;
+
+            for (int ix = 0; ix < str.Length; ix++)
+            {
+                if (char.ToLower(str[ix]) == 'a')
+                {
+                    a++;
+                }
+                else if (char.ToLower(str[ix]) == 'b')
+                {
+                    b++;
+                }
+                else if (char.ToLower(str[ix]) == 'c')
+                {
+                    c++;
+                }
+                else if (char.ToLower(str[ix]) == 'd')
+                {
+                    d++;
+                }
+                else if (char.ToLower(str[ix]) == 'e')
+                {
+                    e++;
+                }
+                else if (char.ToLower(str[ix]) == 'f')
+                {
+                    f++;
+                }
+                else if (char.ToLower(str[ix]) == 'g')
+                {
+                    g++;
+                }
+                else if (char.ToLower(str[ix]) == 'h')
+                {
+                    h++;
+                }
+                else if (char.ToLower(str[ix]) == 'i')
+                {
+                    i++;
+                }
+                else if (char.ToLower(str[ix]) == 'j')
+                {
+                    j++;
+                }
+                else if (char.ToLower(str[ix]) == 'k')
+                {
+                    k++;
+                }
+                else if (char.ToLower(str[ix]) == 'l')
+                {
+                    l++;
+                }
+                else if (char.ToLower(str[ix]) == 'm')
+                {
+                    m++;
+                }
+                else if (char.ToLower(str[ix]) == 'n')
+                {
+                    n++;
+                }
+                else if (char.ToLower(str[ix]) == 'o')
+                {
+                    o++;
+                }
+                else if (char.ToLower(str[ix]) == 'p')
+                {
+                    p++;
+                }
+                else if (char.ToLower(str[ix]) == 'q')
+                {
+                    q++;
+                }
+                else if (char.ToLower(str[ix]) == 'r')
+                {
+                    r++;
+                }
+                else if (char.ToLower(str[ix]) == 's')
+                {
+                    s++;
+                }
+                else if (char.ToLower(str[ix]) == 't')
+                {
+                    t++;
+                }
+                else if (char.ToLower(str[ix]) == 'u')
+                {
+                    u++;
+                }
+                else if (char.ToLower(str[ix]) == 'v')
+                {
+                    v++;
+                }
+                else if (char.ToLower(str[ix]) == 'w')
+                {
+                    w++;
+                }
+                else if (char.ToLower(str[ix]) == 'x')
+                {
+                    x++;
+                }
+                else if (char.ToLower(str[ix]) == 'y')
+                {
+                    y++;
+                }
+                else if (char.ToLower(str[ix]) == 'z')
+                {
+                    z++;
+                }
+            }
+                string answer = string.Empty;
+                if (a > 0)
+                {
+                    answer += $"{a}a";
+                }
+                if (b > 0)
+                {
+                    answer += $"{b}b";
+                }
+                if (c > 0)
+                {
+                    answer += $"{c}c";
+                }
+                if (d > 0)
+                {
+                    answer += $"{d}d";
+                }
+                if (e > 0)
+                {
+                    answer += $"{e}e";
+                }
+                if (f > 0)
+                {
+                    answer += $"{f}f";
+                }
+                if (g > 0)
+                {
+                    answer += $"{g}g";
+                }
+                if (h > 0)
+                {
+                    answer += $"{h}h";
+                }
+                if (i > 0)
+                {
+                    answer += $"{i}i";
+                }
+                if (j > 0)
+                {
+                    answer += $"{j}j";
+                }
+                if (k > 0)
+                {
+                    answer += $"{k}k";
+                }
+                if (l > 0)
+                {
+                    answer += $"{l}l";
+                }
+                if (m > 0)
+                {
+                    answer += $"{m}m";
+                }
+                if (n > 0)
+                {
+                    answer += $"{n}n";
+                }
+                if (o > 0)
+                {
+                    answer += $"{o}o";
+                }
+                if (p > 0)
+                {
+                    answer += $"{p}p";
+                }
+                if (q > 0)
+                {
+                    answer += $"{q}q";
+                }
+                if (r > 0)
+                {
+                    answer += $"{r}r";
+                }
+                if (s > 0)
+                {
+                    answer += $"{s}s";
+                }
+                if (t > 0)
+                {
+                    answer += $"{t}t";
+                }
+                if (u > 0)
+                {
+                    answer += $"{u}u";
+                }
+                if (v > 0)
+                {
+                    answer += $"{v}v";
+                }
+                if (w > 0)
+                {
+                    answer += $"{w}w";
+                }
+                if (x > 0)
+                {
+                    answer += $"{x}x";
+                }
+                if (y > 0)
+                {
+                    answer += $"{y}y";
+                }
+                if (z > 0)
+                {
+                    answer += $"{z}z";
+                }
+            
+            return answer;
+       
+        }
+        public string ReverseLetter(string str)
+        {
+            string letters = string.Empty;
+            for (int i = str.Length - 1; i >= 0; i--)
+            {
+                if (char.IsLetter(str[i]))
+                {
+                    letters += str[i];
+                }
+            }
+            return letters;
+        }
+        public static bool isAValidMessage(string message)
+        {
+            if (!message.Any())
+            {
+                return true;
+            }
+            if (char.IsLetter(message[0]) || char.IsNumber(message[message.Length - 1]) || message == "")
+            {
+                return false;
+            }
+            if (message.Contains(" "))
+            {
+                return false;
+            }
+            
+            List<int> indexes = new List<int>();
+            List<double> words = new List<double>();
+            string num = string.Empty;
+            double counter = 0;
+            for (int i = 0; i < message.Length; i++)
+            {
+                
+                if (char.IsNumber(message[i]))
+                {
+                    if (counter != 0)
+                    {
+                        words.Add(counter);
+                        counter = 0;
+                    }
+                    num += message[i];
+                }
+                if (char.IsLetter(message[i]))
+                {
+                    if (num.Any())
+                    {
+                        indexes.Add(Convert.ToInt32(num));
+                        num = string.Empty;
+                    }
+                    counter++;
+                }
+                if (char.IsWhiteSpace(message[i]))
+                {
+                    return false;
+                }
+            }
+            if (counter != 0)
+            {
+                words.Add(counter);
+               
+            }
+            if (num.Any())
+            {
+                indexes.Add(Convert.ToInt32(num));
+                
+            }
+            
+            for (int i = 0; i < indexes.Count; i++)
+            {
+                for (int j = 0; j < words.Count; j++)
+                {
+                    if (i != j && indexes[i] != words[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public static int SumDigits(int number)
+        {
+            var convert = number.ToString();
+            int count = 0;
+            for (int i = 0; i < convert.Length; i++)
+            {
+                if (char.IsDigit(convert[i]))
+                {
+                    count += Math.Abs(Convert.ToInt32(convert[i] - 48));
+                }
+                
+            }
+            return count;
         }
         public static string RemoveParentheses(string s)
         {
@@ -2370,7 +3039,7 @@ namespace Practice4
             }
             return answer;
         }
-        public static int SumDigits(int number)
+        /*public static int SumDigits(int number)
         {
             var array = number.ToString().ToArray();
             int[] numArray = Array.ConvertAll(number.ToString().ToArray(), item => Convert.ToInt32(item));
@@ -2399,7 +3068,7 @@ namespace Practice4
             }
             var indexFalse = tOrF.IndexOf(false);
             Console.WriteLine(test[indexFalse]);
-        }
+        }*/
 
 
 
