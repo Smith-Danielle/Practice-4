@@ -261,129 +261,437 @@ namespace Practice4
                 Console.WriteLine(item);
             }
         }
-        public static string[] dirReduc(String[] arr)
+        
+        public static int[] CountPositivesSumNegatives(int[] input)
         {
-            List<bool> trues = new List<bool>();
-            if (arr.Length == 4)
+            int[] answer = new int[2];
+            for (int i = 0; i < input.Length; i++)
             {
-                for (int i = 0; i < arr.Length - 1; i++)
+                if (input[i] > 0)
                 {
-                    if (arr[i].ToLower() == "north" && arr[i + 1] != "south" && arr[i + 1] != "north")
-                    {
-                        trues.Add(true);
-                    }
-                    if (arr[i].ToLower() == "south" && arr[i + 1] != "north" && arr[i + 1] != "south")
-                    {
-                        trues.Add(true);
-                    }
-                    if (arr[i].ToLower() == "east" && arr[i + 1] != "west" && arr[i + 1] != "east")
-                    {
-                        trues.Add(true);
-                    }
-                    if (arr[i].ToLower() == "west" && arr[i + 1] != "east" && arr[i + 1] != "west")
-                    {
-                        trues.Add(true);
-                    }
+                    answer[0]++;
                 }
-                if (trues.Count == 4)
+                if (input[i] < 0)
                 {
-                    return arr;
+                    answer[1] += input[i];
                 }
             }
-            for (int i = 0; i < arr.Length - 1; i++)
+            if (answer == null)
             {
-                if (arr[i].ToLower() == "north" && arr[i + 1].ToLower() == "south" || arr[i].ToLower() == "north")
-                {
-                    if (arr.Contains("south") || arr.Contains("SOUTH") || arr.Contains("South"))
-                    {
-                        arr[i] = "0";
+                return new int[0];
+            }
+            foreach (var item in answer)
+            {
+                Console.WriteLine(item);
+            }
+            return answer;
+        }
+        static void Main(string[] args)
+        {
 
-                        if (arr.Contains("south"))
-                        {
-                            arr[Array.IndexOf(arr, "south")] = "0";
-                        }
-                        if (arr.Contains("SOUTH"))
-                        {
-                            arr[Array.IndexOf(arr, "SOUTH")] = "0";
-                        }
-                        if (arr.Contains("South"))
-                        {
-                            arr[Array.IndexOf(arr, "South")] = "0";
-                        }
+            double[] scores = new double[] { 1, 1, 1 };
+            int[] i = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15 };
+            string[] test = new string[] { "#", "!" };
+            Console.WriteLine(ExpandedForm(12));
+        }
+        public static int[] PartsSums(int[] ls)
+        {
+            List<int> sum = new List<int>();
+            int sumNum = 0;
+            if (ls.Length == 0 || ls == null)
+            {
+                return ls;
+            }
+            else
+            {
+                sumNum += ls[0];
+                sum.Add(sumNum);
+            }
+            if (ls.Length > 1)
+            {
+                for (int i = 1; i < ls.Length; i++)
+                {
+                    sumNum -= ls[i];
+                    sum.Add(sumNum);
+                }
+            }
+            return sum.ToArray();
+        }
+        public static string ExpandedForm(long num)
+        {
+            var number = num.ToString();
+            List<string> numList = new List<string>();
+            string zeros = "1";
+            for (int i = number.Length - 1; i >= 0; i--)
+            {
+                if (number[i] != '0')
+                {
+                    
+                    numList.Add(((Convert.ToInt32(number[i]) - 48) * Convert.ToInt32(zeros)).ToString());
+                    
+                }
+                zeros += "0";
+            }
+            numList.Reverse();
+            var answer = string.Join(" + ", numList);
+            return answer;
+        }
+        public static string StripComments(string text, string[] commentSymbols)
+        {
+            string answer = string.Empty;
+            bool add = true;
+            
+            
+            for (int i = 1; i < text.Length; i++)
+            {
+                if (commentSymbols.Contains(text[i].ToString()))
+                {
+                    add = false;
+                    
+                    
+                    /*if (i > 2 && text[i - 1] == ' ')
+                    {
+                        text = text.Remove(i - 1);
+                    }*/
+                    
+
+                }
+                
+                if (add == false && text[i] == '\n')
+                {
+                    add = true;
+                    /*if (i > 2 && text[i - 1] == ' ')
+                    {
+                        text = text.Remove(i - 1);
+                    }*/
+
+                }
+                if (add == false)
+                {
+                    text = $"{text.Substring(0, i)}{text.Substring(i + 1)}";
+                    
+
+                }
+
+            }
+            return text.Trim();
+        }
+        public static int[] Between(int a, int b)
+        {
+            List<int> answer = new List<int>();
+            for (int i = a; i < b + 1; i++)
+            {
+                
+                    answer.Add(i);
+                
+            }
+            foreach (var item in answer)
+            {
+                Console.WriteLine(item);
+            }
+            return answer.ToArray();
+        }
+        public static List<int> SumConsecutives(List<int> s)
+        {
+            List<int> sNew = new List<int>();
+            int? consecutive = null;
+            int consecutiveAdd = 0;
+            
+            for (int i = 0; i < s.Count - 1; i++)
+            {
+                if (s[i] != s[i + 1] && s[i] != consecutive)
+                {
+                    if (consecutive != null)
+                    {
+                        sNew.Add(consecutiveAdd);
+                        consecutive = null;
+                        consecutiveAdd = 0;
+                    }
+                    sNew.Add(s[i]);
+                }
+                else
+                {
+                    if (s[i] != consecutive && consecutiveAdd != 0)
+                    {
+                        sNew.Add(consecutiveAdd);
+                        consecutive = null;
+                        consecutiveAdd = 0;
+                    }
+                    consecutive = s[i];
+                    consecutiveAdd += s[i];
+
+
+                }
+            }
+            if (consecutive != null)
+            {
+                sNew.Add(consecutiveAdd);
+            }
+            if (s[s.Count - 1] == s[s.Count - 2])
+            {
+                sNew[sNew.Count - 1] = sNew[sNew.Count - 1] + s[s.Count - 1];
+            }
+            else
+            {
+                sNew.Add(s[s.Count - 1]);
+            }
+
+
+            foreach (var item in sNew)
+            {
+                Console.WriteLine(item);
+            }
+            return sNew;
+        }
+        public static double[] Tribonacci(double[] signature, int n)
+        {
+
+            if (n == 0)
+            {
+                double[] answer0 = new double[] { };
+                return answer0;
+            }
+            if (n == 1)
+            {
+                double[] answer1 = new double[] { signature[0] };
+                return answer1;
+            }
+            if (n == 2)
+            {
+                double[] answer2 = new double[] { signature[0], signature[1] };
+                return answer2;
+            }
+            var sign = signature.ToList();
+            double lastNum = signature.Sum();
+            if (n > 3)
+            {
+                sign.Add(lastNum);
+            }
+            int removeIndex = 0;
+            while (sign.Count < n)
+            {
+                lastNum = lastNum - sign[removeIndex] + lastNum;
+                sign.Add(lastNum);
+                removeIndex++;
+            }
+            return sign.ToArray();
+        }
+        public static int Score(int[] dice)
+        {
+            int score = 0;
+            var threes = dice.GroupBy(item => item).Where(item => item.Count() >= 3).Select(item => item.Key).ToList();
+            int third = 0;
+            if (threes.Any())
+            {
+                third = threes.Last();
+            }
+        
+            if (third == 1)
+            {
+                score += 1000;
+            }
+            if (third == 2)
+            {
+                score += 200;
+            }
+            if (third == 3)
+            {
+                score += 300;
+            }
+            if (third == 4)
+            {
+                score += 400;
+            }
+            if (third == 5)
+            {
+                score += 500;
+            }
+            if (third == 6)
+            {
+                score += 600;
+            }
+
+            int count1 = 0;
+            int count2 = 0;
+            int count3 = 0;
+            int count4 = 0;
+            int count5 = 0;
+            int count6 = 0;
+            
+            for (int i = 0; i < dice.Length; i++)
+            {
+                if (third == 1 && dice[i] == 1)
+                {
+                    if (count1 < 3)
+                    {
+                        dice[i] = 0;
+                        count1++;
                     }
                 }
-                if (arr[i].ToLower() == "south" && arr[i + 1].ToLower() == "north" || arr[i].ToLower() == "south")
+                if (third == 2 && dice[i] == 2)
                 {
-                    if (arr.Contains("north") || arr.Contains("NORTH") || arr.Contains("North"))
+                    if (count2 < 3)
                     {
-                        arr[i] = "0";
-
-                        if (arr.Contains("north"))
-                        {
-                            arr[Array.IndexOf(arr, "north")] = "0";
-                        }
-                        if (arr.Contains("NORTH"))
-                        {
-                            arr[Array.IndexOf(arr, "NORTH")] = "0";
-                        }
-                        if (arr.Contains("North"))
-                        {
-                            arr[Array.IndexOf(arr, "North")] = "0";
-                        }
+                        dice[i] = 0;
+                        count2++;
                     }
                 }
-                if (arr[i].ToLower() == "east" && arr[i + 1].ToLower() == "west" || arr[i].ToLower() == "east")
+                if (third == 3 && dice[i] == 3)
                 {
-                    if (arr.Contains("west") || arr.Contains("WEST") || arr.Contains("West"))
+                    if (count3 < 3)
                     {
-                        arr[i] = "0";
-
-                        if (arr.Contains("west"))
-                        {
-                            arr[Array.IndexOf(arr, "west")] = "0";
-                        }
-                        if (arr.Contains("WEST"))
-                        {
-                            arr[Array.IndexOf(arr, "WEST")] = "0";
-                        }
-                        if (arr.Contains("West"))
-                        {
-                            arr[Array.IndexOf(arr, "West")] = "0";
-                        }
+                        dice[i] = 0;
+                        count3++;
                     }
                 }
-                if (arr[i].ToLower() == "west" && arr[i + 1].ToLower() == "east" || arr[i].ToLower() == "west")
+                if (third == 4 && dice[i] == 1)
                 {
-                    if (arr.Contains("east") || arr.Contains("EAST") || arr.Contains("East"))
+                    if (count4 < 3)
                     {
-                        arr[i] = "0";
-
-                        if (arr.Contains("east"))
-                        {
-                            arr[Array.IndexOf(arr, "east")] = "0";
-                        }
-                        if (arr.Contains("EAST"))
-                        {
-                            arr[Array.IndexOf(arr, "EAST")] = "0";
-                        }
-                        if (arr.Contains("East"))
-                        {
-                            arr[Array.IndexOf(arr, "East")] = "0";
-                        }
+                        dice[i] = 0;
+                        count4++;
+                    }
+                }
+                if (third == 5 && dice[i] == 5)
+                {
+                    if (count5 < 3)
+                    {
+                        dice[i] = 0;
+                        count5++;
+                    }
+                }
+                if (third == 6 && dice[i] == 6)
+                {
+                    if (count6 < 3)
+                    {
+                        dice[i] = 0;
+                        count6++;
                     }
                 }
 
             }
-            List<string> removal = new List<string>();
-            foreach (var item in arr)
+            Console.WriteLine(count1);
+            for (int i = 0; i < dice.Length; i++)
             {
-                if (item != "0")
+                if (dice[i] == 1)
                 {
-                    removal.Add(item);
+                    score += 100;
+                }
+                if (dice[i] == 5)
+                {
+                    score += 50;
                 }
             }
-            var conversion = removal.ToArray();
-            return conversion;
+            return score;
+                
+        }
+        public static string[] dirReduc(string[] arr)
+        {
+            List<string> directions = new List<string> { "first" };
+            var arr1 = arr.ToList();
+            arr1.Add("last");
+            var arr2 = arr1.ToArray();
+           
+            
+            for (int i = 0; i < arr2.Length; i++)
+            {
+                if (arr2[i].ToLower() == "north")
+                {
+
+                    if (arr2[i + 1].ToLower() == "south" || directions.Last().ToLower() == "south")
+                    {
+
+                        
+                        if (arr2[i + 1].ToLower() == "south")
+                        {
+                            arr2[i + 1] = "removed";
+
+                        }
+                        
+                        if (directions.Any() && directions.Last().ToLower() == "south")
+                        {
+                            directions.RemoveAt(directions.Count - 1);
+                        }
+                        
+                        arr2[i] = "removed";
+                        
+
+
+                    }
+                    else
+                    {
+                        directions.Add(arr2[i]);
+                        
+                    }
+                }
+                
+                if (arr2[i].ToLower() == "south")
+                {
+                    
+                    if (arr2[i + 1].ToLower() == "north" || directions.Last().ToLower() == "north")
+                    {
+                        
+                        if (arr2[i + 1].ToLower() == "north")
+                        {
+                            arr2[i + 1] = "removed";
+                        }
+                        if (directions.Any() && directions.Last().ToLower() == "north")
+                        {
+                            directions.RemoveAt(directions.Count - 1);
+                        }
+                        arr2[i] = "removed";
+                    }
+                    else
+                    {
+                        directions.Add(arr2[i]);
+                        
+                    }
+                }
+                if (arr2[i].ToLower() == "east")
+                {
+                    if (arr2[i + 1].ToLower() == "west" || directions.Last().ToLower() == "west")
+                    {
+                        
+                        if (arr2[i + 1].ToLower() == "west")
+                        {
+                            arr2[i + 1] = "removed";
+                        }
+                        if (directions.Any() && directions.Last().ToLower() == "west")
+                        {
+                            directions.RemoveAt(directions.Count - 1);
+                        }
+                        arr2[i] = "removed";
+                    }
+                    else
+                    {
+                        directions.Add(arr2[i]);
+                        
+                    }
+                }
+                if (arr2[i].ToLower() == "west")
+                {
+                    if (arr2[i + 1].ToLower() == "east" || directions.Last().ToLower() == "east")
+                    {
+                        
+                        if (arr2[i + 1].ToLower() == "east")
+                        {
+                            arr2[i + 1] = "removed";
+                        }
+                        if (directions.Any() && directions.Last().ToLower() == "east")
+                        {
+                            directions.RemoveAt(directions.Count - 1);
+                        }
+                        arr2[i] = "removed";
+                    }
+                    else
+                    {
+                        directions.Add(arr2[i]);
+                        
+                    }
+                }
+            }
+            directions.RemoveAt(0);
+            return directions.ToArray();
         }
 
 
@@ -1264,12 +1572,11 @@ namespace Practice4
             {
                 fact *= i;
             }
-            var convert = fact.ToString().Reverse().ToList();
+            var convert = fact.ToString();
             int zeros = 0;
-            for (int i = 0; i < convert.Count; i++)
+            for (int i = convert.Length - 1; i >= 0; i--)
             {
-                if (convert[0] == '0')
-                {
+               
                     if (convert[i] == '0')
                     {
                         zeros++;
@@ -1278,11 +1585,7 @@ namespace Practice4
                     {
                         break;
                     }
-                }
-                else
-                {
-                    break;
-                }
+            
             }
             return zeros;
            
@@ -1329,15 +1632,16 @@ namespace Practice4
             var answer = move.ToArray();
             return answer;
         }
-        static void Main(string[] args)
+        
+        public static bool StringIntGreaterThan(string a, string b)
         {
-
-            int[] scores = new int[] { 9, 7, 2, 5, -2, -7, -4, -5, 1, -5, 4, -5, 2, 9, 2, -7, -7, 4, 3, 8 };
-            string[] test = new string[] { "ninja", "samurai", "ronin", "dan", "john" };
-            Console.WriteLine(FormatWords(test));
-
-
-
+            var aNum = int.Parse(a);
+            var bNum = int.Parse(b);
+            if (aNum > bNum)
+            {
+                return true;
+            }
+            return false;
         }
         public static string FormatWords(string[] words)
         {
@@ -2845,35 +3149,7 @@ namespace Practice4
             }
             return count;
         }
-        public static string StripComments(string text, string[] commentSymbols)
-        {
-            bool action = true;
-            string newText = string.Empty;
-            
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (!commentSymbols.Contains(text[i].ToString()) && action == true)
-                {
-                    newText += text[i];
-                }
-                else
-                {
-                    action = false;
-                }
-                string newText2 = string.Empty;
-                if (action == false && text[i] == '\n')
-                {
-                    newText2 = newText.Remove(newText.Length - 1);
-                    newText2 += text[i];
-                    action = true;
-                }
-                if (newText2.Length > 0)
-                {
-                    newText = newText2;
-                }
-            }
-            return newText;
-        }
+        
         public static int Average(int[] scores)
         {
             double sum = scores.Sum();
