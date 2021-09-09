@@ -286,14 +286,7 @@ namespace Practice4
             }
             return answer;
         }
-        static void Main(string[] args)
-        {
-
-            double[] scores = new double[] { 1, 1, 1 };
-            int[] i = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15 };
-            string[] test = new string[] { "#", "!" };
-            Console.WriteLine(ExpandedForm(12));
-        }
+        
         public static int[] PartsSums(int[] ls)
         {
             List<int> sum = new List<int>();
@@ -336,6 +329,34 @@ namespace Practice4
             var answer = string.Join(" + ", numList);
             return answer;
         }
+        static void Main(string[] args)
+        {
+
+            double[] scores = new double[] { 1, 1, 1 };
+            int[] i = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15 };
+            Console.WriteLine(perimeter(7));
+        }
+        public static BigInteger perimeter(BigInteger n)
+        {
+            List<BigInteger> fibList = new List<BigInteger> {1};
+            BigInteger fib = 1;
+            BigInteger fibNext = 0;
+            BigInteger add = 0;
+            for (int i = 0; i < n; i++)
+            {
+                
+                fibList.Add(fib + fibNext);
+                fibNext = fib;
+                fib = fibList.Last();
+            }
+            foreach (var item in fibList)
+            {
+                add += item;
+            }
+            return 4 * add;
+            
+            
+        }
         public static string StripComments(string text, string[] commentSymbols)
         {
             string answer = string.Empty;
@@ -348,33 +369,44 @@ namespace Practice4
                 {
                     add = false;
                     
-                    
-                    /*if (i > 2 && text[i - 1] == ' ')
+                
+                    if (i > 0 && text[i - 1] == ' ')
                     {
-                        text = text.Remove(i - 1);
-                    }*/
-                    
+                        text = text.Remove(i - 1, 1);
+                        text = text.Insert(i - 1, "0");
+                    }
+
 
                 }
-                
+
                 if (add == false && text[i] == '\n')
                 {
                     add = true;
                     /*if (i > 2 && text[i - 1] == ' ')
-                    {
-                        text = text.Remove(i - 1);
-                    }*/
+                   {
+                       text = text.Remove(i - 1);
+                   }*/
+
 
                 }
                 if (add == false)
                 {
-                    text = $"{text.Substring(0, i)}{text.Substring(i + 1)}";
+                    text = text.Remove(i, 1);
+                    text = text.Insert(i, "0");
                     
 
                 }
 
             }
-            return text.Trim();
+            string possible = string.Empty;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] != '0')
+                {
+                    possible += text[i];
+                }
+            }
+            return possible.Trim();
         }
         public static int[] Between(int a, int b)
         {
